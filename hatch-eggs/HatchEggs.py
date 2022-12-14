@@ -15,7 +15,57 @@ class HatchEggs(Common):
         super().__init__(controller_state, options)
 
     async def run(self):
-        await self.hatch_egg()
+
+        for idx in range(0, 6):
+            logger.info('new row')
+
+            if idx == 0:
+                await self.button_ctl('x', wait_sec=2.0)
+                await self.button_ctl('a', wait_sec=5.0)
+            else:
+                await self.button_ctl('right')
+
+            await self.button_ctl('minus', wait_sec=2.0)
+            await self.button_ctl('down')
+            await self.button_ctl('down')
+            await self.button_ctl('down')
+            await self.button_ctl('down')
+            await self.button_ctl('a', wait_sec=2.0)
+
+            for i in range(0, idx+1):
+                await self.button_ctl('left')
+
+
+            await self.button_ctl('down')
+            await self.button_ctl('a', wait_sec=2.0)
+            await self.button_ctl('b', wait_sec=2.0)
+            await self.button_ctl('b', wait_sec=5.0)
+
+            await self.hatch_egg()
+            logger.info('hatch eggs done') 
+
+            await self.button_ctl('x', wait_sec=2.0)
+            await self.button_ctl('a', wait_sec=5.0)
+            await self.button_ctl('left')
+            await self.button_ctl('down')
+
+            await self.button_ctl('minus', wait_sec=2.0)
+            await self.button_ctl('down')
+            await self.button_ctl('down')
+            await self.button_ctl('down')
+            await self.button_ctl('down')
+            await self.button_ctl('a', wait_sec=2.0)
+
+            for i in range(0, idx+1):
+                await self.button_ctl('right')  
+
+            await self.button_ctl('up', wait_sec=2.0)
+            await self.button_ctl('a', wait_sec=2.0)
+            # await self.button_ctl('b', wait_sec=2.0)
+            # await self.button_ctl('b', wait_sec=2.0)          
+
+            idx += 1
+
 
     async def hatch_egg(self):
         await self.button_ctl('plus', wait_sec=2.0)
@@ -29,9 +79,14 @@ class HatchEggs(Common):
             await self.left_stick(angle=90)
             await self.wait(3.0)
             await self.button_ctl('a')
+            await self.button_ctl('a')
+            await self.button_ctl('a')
             
             if notice_time < time.time():
                 logger.info('あと{}秒です'.format(round(limit_time-notice_time)))
                 notice_time += 60
 
         await self.button_ctl('plus')
+
+        await self.left_stick('center')
+        await self.wait(3.0)
