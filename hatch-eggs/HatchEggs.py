@@ -75,9 +75,9 @@ class HatchEggs(Common):
 
         while time.time() < limit_time:
             await self.left_stick(angle=270)
-            await self.wait(3.0)
+            await self.wait(3.3)
             await self.left_stick(angle=90)
-            await self.wait(3.0)
+            await self.wait(2.7)
             await self.button_ctl('a')
             await self.button_ctl('a')
             await self.button_ctl('a')
@@ -86,7 +86,8 @@ class HatchEggs(Common):
                 logger.info('あと{}秒です'.format(round(limit_time-notice_time)))
                 notice_time += 60
 
-        await self.button_ctl('plus')
 
         await self.left_stick('center')
-        await self.wait(3.0)
+        await self.wait(1.5)
+
+        await self.button_ctl('plus', wait_sec=2.0)
