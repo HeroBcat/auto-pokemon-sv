@@ -22,7 +22,7 @@ class GenerateEggs(Common):
 
     async def prepare_picnic(self):
         await self.left_stick(angle=270)
-        await self.wait(1.5)
+        await self.wait(0.5)
         await self.left_stick('center')
         await self.wait(3.0)
     
@@ -50,7 +50,7 @@ class GenerateEggs(Common):
             await self.button_ctl('b', wait_sec=240.0)
 
             idx = 0
-            while idx < 60:
+            while idx < 48:
                 idx += 1
                 await self.button_ctl('a', wait_sec=0.8)
 
@@ -59,3 +59,4 @@ class GenerateEggs(Common):
                 notice_time += 60
         
         logger.info('30分経過したので孵化の観察を終了します')
+        
