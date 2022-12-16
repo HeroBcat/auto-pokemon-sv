@@ -68,6 +68,8 @@ class HatchEggs(Common):
 
 
     async def hatch_egg(self):
+        await self.left_stick('center')
+        await self.wait(1.5)
         await self.button_ctl('plus', wait_sec=2.0)
 
         limit_time = time.time() + 300 #孵化歩数が長いポケモンで4分半だったのでこの数値にした
@@ -91,3 +93,4 @@ class HatchEggs(Common):
         await self.wait(1.5)
 
         await self.button_ctl('plus', wait_sec=2.0)
+        
